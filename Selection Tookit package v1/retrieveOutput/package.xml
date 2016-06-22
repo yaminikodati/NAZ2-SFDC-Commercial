@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Interview_Controller</members>
-        <members>TestDataFactory</members>
-        <members>TestInterview_Controller</members>
-        <members>TestInterview_Record</members>
-        <name>ApexClass</name>
-    </types>
-    <types>
-        <members>Interview_Create</members>
-        <members>Interview_View</members>
-        <name>ApexPage</name>
-    </types>
-    <types>
-        <members>Interview_Record</members>
-        <name>ApexTrigger</name>
-    </types>
-    <types>
         <members>Selection_Toolkit</members>
         <name>CustomApplication</name>
+    </types>
+	<types>
+        <members>Anchor__c</members>
+        <members>Application__c</members>
+        <members>Candidate__c</members>
+        <members>Interview_Section_Settings__c</members>
+        <members>Interview__c</members>
+        <members>Position__c</members>
+        <members>Question__c</members>
+        <members>Textarea_Minimum_Chars__c</members>
+        <name>CustomObject</name>
+    </types>
+	<types>
+        <members>Anchor__c</members>
+        <members>Application__c</members>
+        <members>Candidate__c</members>
+        <members>Interview__c</members>
+        <members>Position__c</members>
+        <members>Question__c</members>
+        <name>CustomTab</name>
     </types>
     <types>
         <members>Anchor__c.Active__c</members>
@@ -127,54 +131,9 @@
         <name>CustomLabel</name>
     </types>
     <types>
-        <members>Anchor__c</members>
-        <members>Application__c</members>
-        <members>Candidate__c</members>
-        <members>Interview_Section_Settings__c</members>
-        <members>Interview__c</members>
-        <members>Position__c</members>
-        <members>Question__c</members>
-        <members>Textarea_Minimum_Chars__c</members>
-        <name>CustomObject</name>
-    </types>
-    <types>
-        <members>Anchor__c</members>
-        <members>Application__c</members>
-        <members>Candidate__c</members>
-        <members>Interview__c</members>
-        <members>Position__c</members>
-        <members>Question__c</members>
-        <name>CustomTab</name>
-    </types>
-    <types>
-        <members>Selection_Toolkit_Email_Templates</members>
-        <name>EmailFolder</name>
-    </types>
-    <types>
-        <members>Selection_Toolkit_Email_Templates/Selection_Toolkit_Interview_Scheduled</members>
-        <name>EmailTemplate</name>
-    </types>
-    <types>
-        <members>Selection_Toolkit_Send_Email_Notification-1</members>
-        <name>Flow</name>
-    </types>
-    <types>
-        <members>Anchor__c-Anchor Layout</members>
-        <members>Application__c-Application Layout</members>
-        <members>Candidate__c-Candidate Layout</members>
-        <members>Interview__c-Interview Layout</members>
-        <members>Position__c-Position Layout</members>
-        <members>Question__c-Question Layout</members>
-        <name>Layout</name>
-    </types>
-    <types>
-        <members>Selection_Toolkit_HR_Business_Partner</members>
-        <members>Selection_Toolkit_Interviewer</members>
-        <name>PermissionSet</name>
-    </types>
-    <types>
         <members>HR Business Partner</members>
         <members>Interviewer</members>
+		<members>Admin</members>
         <name>Profile</name>
     </types>
     <types>
@@ -182,18 +141,41 @@
         <members>Interviewer</members>
         <name>Role</name>
     </types>
-    <types>
-        <members>Candidate__c.*</members>
-        <members>Position__c.*</members>
-        <name>SharingOwnerRule</name>
+	<types>
+        <members>Anchor__c-Anchor Layout</members>
+        <members>Application__c-Application Layout</members>
+		<members>Interview__c-Interview Layout</members>
+        <members>Position__c-Position Layout</members>
+        <members>Question__c-Question Layout</members>
+        <name>Layout</name>
+    </types>
+	<types>
+        <members>Interview_Controller</members>
+        <members>TestDataFactory</members>
+        <members>TestInterview_Controller</members>
+        <members>TestInterview_Record</members>
+        <name>ApexClass</name>
+    </types>
+	<types>
+        <members>Interview_Create</members>
+        <members>Interview_View</members>
+        <name>ApexPage</name>
     </types>
     <types>
-        <members>General_Images</members>
-        <name>StaticResource</name>
+        <members>Interview_Record</members>
+        <name>ApexTrigger</name>
     </types>
-    <types>
+	<types>
         <members>Interview__c.Selection_Toolkit_Send_Email_Notification</members>
         <name>WorkflowAlert</name>
+    </types>
+	<types>
+        <members>Selection_Toolkit_Send_Email_Notification-1</members>
+        <name>Flow</name>
+    </types>
+	<types>
+        <members>Selection_Toolkit_Email_Templates/Selection_Toolkit_Interview_Scheduled</members>
+        <name>EmailTemplate</name>
     </types>
     <version>36.0</version>
 </Package>
