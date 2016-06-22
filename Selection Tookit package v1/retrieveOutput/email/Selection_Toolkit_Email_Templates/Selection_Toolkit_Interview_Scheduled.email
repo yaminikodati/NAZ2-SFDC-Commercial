@@ -1,0 +1,19 @@
+Hello, <br><br>
+
+A Candidate Interview has been assigned to you. <br><br>
+
+Name of the Candidate: {!Interview__c.Candidate_Name__c}<br>
+Name of the Recruitment Coordinator:  {!Interview__c.Recruitment_Coordinator__c}<br>
+Type of the Interview: {!Interview__c.RecordType}<br>
+Due date of the Interview:  {!Interview__c.End_Time__c}<br><br>
+
+
+
+Other Comments:<br>
+{!Interview__c.Comments__c}<br><br>
+
+Link to the Interview record: https://cs43.salesforce.com/{!Interview__c.Id}<br><br>
+
+Best Regards<br>
+
+Recruitment team.

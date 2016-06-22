@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MyPkg</fullName>
+    
+
+<types> 
+        <members>Selection_Toolkit</members>
+        <name>CustomApplication</name>
+</types>
+
+<types> 
+        <members>Anchor__c</members>
+        <members>Candidate__c</members>
+        <members>Position__c</members>
+        <members>Application__c</members>    
+        <members>Interview__c</members>       
+        <members>Question__c</members>
+       <name>CustomTab</name>
+</types>
+
+<types>
+
+        <members>HR Business Partner</members>
+        <members>Interviewer</members>
+        <name>Profile</name>
+</types>
+<types>
+
+        <members>HR_Business_Partner</members>
+        <members>Interviewer</members>
+        <name>Role</name>
+</types>
+<types>
+        <members>Anchor__c</members>
+        <members>Candidate__c</members>
+        <members>Position__c</members>
+        <members>Application__c</members>
+        <members>Interview__c</members>
+        <members>Question__c</members>
+        <members>Interview_Section_Settings__c</members>
+        <members>Textarea_Minimum_Chars__c</members>
+        <name>CustomObject</name>
+    </types>
+
+<types> 
+        <members>Anchor__c-Anchor Layout</members>
+        <members>Application__c-Application Layout</members>
+        <members>Candidate__c-Candidate Layout</members>
+        <members>Position__c-Position Layout</members>
+        <members>Question__c-Question Layout</members>
+        <members>Interview__c-Interview Layout</members>
+       <name>Layout</name>
+
+</types>
+
+<types>
+        <members>Anchor__c.Active__c</members>
+        <members>Anchor__c.Anchor__c</members>
+        <members>Anchor__c.Assessor__c</members>
+        <members>Anchor__c.Competency__c</members>
+        <members>Anchor__c.Score_Area__c</members>
+        <members>Question__c.Active__c</members>
+        <members>Question__c.Question__c</members>
+        <members>Question__c.Assessor__c</members>
+        <members>Question__c.Competency__c</members>
+        <members>Question__c.Sub_Area__c</members>
+        <members>Application__c.Candidate__c</members>
+        <members>Application__c.Position__c</members>
+        <members>Position__c.Description__c</members>
+        <members>Position__c.Function__c</members>
+        <members>Position__c.Position_Name__c</members>
+        <members>Position__c.Role__c</members>
+        <members>Position__c.Status__c</members>
+        <members>Candidate__c.Bands__c</members>
+        <members>Candidate__c.Candidate_Name__c</members>
+        <members>Candidate__c.Cultural_Bar_Raiser_score__c</members>
+        <members>Candidate__c.EBM_score__c</members>
+        <members>Candidate__c.Email__c</members>
+        <members>Candidate__c.Head_Of_Function_score__c</members>
+        <members>Candidate__c.Hiring_Manager_Score__c</members>
+        <members>Candidate__c.Key_Challenger_score__c</members>
+        <members>Candidate__c.Office__c</members>
+        <members>Candidate__c.Overall_Score__c</members>
+        <members>Candidate__c.People_Manager_Score__c</members>
+        <members>Candidate__c.Phone__c</members>
+        <members>Candidate__c.Position__c</members>
+        <members>Candidate__c.Status__c</members>
+        <members>Interview__c.Candidate__c</members>
+        <members>Interview__c.Candidate_Name__c</members>
+        <members>Interview__c.Comments__c</members>
+        <members>Interview__c.End_Time__c</members>
+        <members>Interview__c.Interview_Date__c</members>
+        <members>Interview__c.Interviewer__c</members>
+        <members>Interview__c.Interviewer_Email__c</members>
+        <members>Interview__c.Notes__c</members>
+        <members>Interview__c.Opportunities__c</members>
+        <members>Interview__c.Overall_Score__c</members>
+        <members>Interview__c.Position__c</members>
+        <members>Interview__c.Position_Name__c</members>
+        <members>Interview__c.Recruitment_Coordinator__c</members>
+        <members>Interview__c.Recruitment_Coordinator_Email__c</members>
+        <members>Interview__c.Score_1__c</members>
+        <members>Interview__c.Score_2__c</members>
+        <members>Interview__c.Score_3__c</members>
+        <members>Interview__c.Score_4__c</members>
+        <members>Interview__c.Selected_Anchors__c</members>
+        <members>Interview__c.Selected_Question_1__c</members>
+        <members>Interview__c.Selected_Question_2__c</members>
+        <members>Interview__c.Selected_Question_3__c</members>
+        <members>Interview__c.Selected_Question_4__c</members>
+        <members>Interview__c.Start_Time__c</members>
+        <members>Interview__c.Status__c</members>
+        <members>Interview__c.Strengths__c</members>
+        <members>Textarea_Minimum_Chars__c.Is_Active__c</members>
+        <members>Textarea_Minimum_Chars__c.Minimum_Chars__c</members>
+        <members>Textarea_Minimum_Chars__c.Page_Name__c</members>
+        <members>Textarea_Minimum_Chars__c.Text_Area_Id__c</members>
+        <members>Interview_Section_Settings__c.Anchor_Assessor__c</members>
+        <members>Interview_Section_Settings__c.Assessor__c</members>
+        <members>Interview_Section_Settings__c.Competency__c</members>
+        <members>Interview_Section_Settings__c.Has_Anchor__c</members>
+        <members>Interview_Section_Settings__c.Intro__c</members>
+        <members>Interview_Section_Settings__c.Is_Active__c</members>
+        <name>CustomField</name>
+    </types>
+
+<types> 
+        <members>Candidate__c.*</members>
+        <members>Position__c.*</members>
+        <name>SharingOwnerRule</name>
+</types>
+
+
+<types>     
+        <members>General_Images</members>
+        <name>StaticResource</name>
+</types>
+
+<types>     
+        <members>Interview_Controller</members>
+        <members>TestDataFactory</members>
+        <members>TestInterview_Controller</members>
+        <members>TestInterview_Record</members>
+        <name>ApexClass</name>
+</types>
+
+<types>     
+        <members>Interview_Record</members>
+        <name>ApexTrigger</name>
+</types>
+
+<types>     
+        <members>Interview_Create</members>
+        <members>Interview_View</members>
+        <name>ApexPage</name>
+</types>
+
+<types>     
+        <members>Selection_Toolkit_HR_Business_Partner</members>
+        <members>Selection_Toolkit_Interviewer</members>
+        <name>PermissionSet</name>
+</types>
+
+<types>     
+        <members>Interview_Acceptable</members>
+        <members>Interview_Are_you_sure</members>
+        <members>Interview_Cancel</members>
+        <members>Interview_Candidate_CV</members>
+        <members>Interview_Candidate_Name</members>
+        <members>Interview_Completed</members>
+        <members>Interview_Date</members>
+        <members>Interview_Enter_More_Charachters</members>
+        <members>Interview_Error_Occured</members>
+        <members>Interview_Favorable</members>
+        <members>Interview_Finalize_Interview</members>
+        <members>Interview_Interviewer_Name</members>
+        <members>Interview_Introduction</members>
+        <members>Interview_Lead</members>
+        <members>Interview_Modal_Left_Button</members>
+        <members>Interview_Modal_Right_Button</members>
+        <members>Interview_Modal_Single_Button</members>
+        <members>Interview_No_Previous_Interviews</members>
+        <members>Interview_Open</members>
+        <members>Interview_Please_Choose_Question</members>
+        <members>Interview_Please_Choose_Score</members>
+        <members>Interview_Position</members>
+        <members>Interview_Previous_Interviews_Header</members>
+        <members>Interview_Question_Guide</members>
+        <members>Interview_Quit_Interview</members>
+        <members>Interview_Save_Interview</members>
+        <members>Interview_Save_for_Later</members>
+        <members>Interview_Saved_Successfully</members>
+        <members>Interview_Start_Interview</members>
+        <members>Interview_Status</members>
+        <members>Interview_Submit</members>
+        <members>Interview_Submit_Interview_Error</members>
+        <members>Interview_Unfavorable</members>
+        <name>CustomLabel</name>
+</types>
+
+<types>     
+        <members>Selection_Toolkit_Email_Templates</members>
+        <name>EmailFolder</name>
+</types>
+
+<types>     
+        <members>Selection_Toolkit_Email_Templates/Selection_Toolkit_Interview_Scheduled</members>
+        <name>EmailTemplate</name>
+</types>
+
+<types>     
+        <members>Interview__c.Selection_Toolkit_Send_Email_Notification</members>
+        <name>WorkflowAlert</name>
+</types>
+<types> 
+        <members>Selection_Toolkit_Send_Email_Notification-1</members>
+        <name>Flow</name>
+</types>
+
+
+    <version>36.0</version>
+</Package>

@@ -1,0 +1,1202 @@
+<apex:page standardController="Interview__c" standardStylesheets="true" extensions="Interview_Controller" docType="html-5.0" showHeader="false" sidebar="true">
+<html  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <apex:stylesheet value="{!URLFOR($Resource.vendors,'vendors/bootstrap/bootstrap.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.SLDS0121,'SLDS0121/slds.css')}"/>
+
+  <apex:includeScript value="{!URLFOR($Resource.vendors,'vendors/jquery/jquery.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.vendors,'vendors/bootstrap/bootstrap.js')}"/>
+  <apex:variable value="{!URLFOR($Resource.SLDS0121,'SLDS0121/assets/icons/utility-sprite/svg/symbols.svg')}" var="UTILITY_SVG" />  
+  <apex:variable value="{!URLFOR($Resource.SLDS0121,'SLDS0121/assets/icons/standard-sprite/svg/symbols.svg')}" var="STANDARD_SVG" />    
+  <apex:includeScript value="{!URLFOR($Resource.vendors,'vendors/fastclick/fastclick.js') }"/>
+
+  <style>
+    body {
+      overflow: auto;
+    }
+
+    .slds {
+      background: url("{! URLFOR($Resource.General_Images,'/General_Images/background2.png') }");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center top;
+      background-color: #ffffdf;      
+      padding: 15px 0;
+    }
+
+    html, body, .slds, .slds td, h1, h2, h3, h4, h5, h6 {
+      font-family: Verdana, Geneva, sans-serif;
+    }
+
+    .slds .slds-form-element__label {
+      color: #7b6845;
+    }
+
+    .slds .slds-text-heading--label {
+      color: black;
+    }
+
+    .slds .slds-page-header {
+      background-color: #F4F2E9;
+      border-bottom: 1px solid #FFCAAF;
+    }
+
+    .slds .slds-checkbox .slds-checkbox--faux {
+      color: #B2B2B2;
+    }
+
+    .slds-page-header__title {
+      color: #de1306;
+      font-family: Verdana, Geneva, sans-serif;
+    }
+
+    .headerIcon {
+      background-color: #DE1306;
+    }
+    .instructionCard .slds-icon {
+      background-color: #F98E00;
+      padding: 5px;
+    }
+
+    .scoreAndAnchors {
+      table-layout: fixed;
+      width: 100%;
+      background: #ff3232; /* Old browsers */
+      background: -moz-linear-gradient(left,  #ff3232 0%, #ffff00 50%, #00ff00 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(left,  #ff3232 0%,#ffff00 50%,#00ff00 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to right,  #ff3232 0%,#ffff00 50%,#00ff00 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3232', endColorstr='#00ff00',GradientType=1 ); /* IE6-9 */      
+    }
+    .scoreAndAnchors .scoreRow td {
+      color: #7b6845;
+      text-align: center;
+      border: 1px solid #FFCAAF;
+      border-top: none;
+      background-color: #f8f8f8;
+      padding: 5px;
+    }
+
+    .scoreAndAnchors:not(#overallScore):not(.disabled) .scoreRow td {
+      cursor: pointer;
+    }
+
+    .scoreAndAnchors .scoreRow td input {
+      display: none;
+    }
+
+    .scoreAndAnchors .scoreRow td.selectedScore {
+      background-color: transparent;
+    }
+
+    .rateLabels td {
+      border: 1px solid #FFCAAF;
+      border-top: none;
+      text-align: center;      
+      padding: 5px 0;
+    }
+
+    td.questionsDescription {
+      color: #7b6845;      
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      vertical-align: middle;   
+      font-weight: bold;
+      text-align: center;   
+      padding: 10px;
+      width: 20%;
+      background: white;
+
+    }
+
+    .selectedQuestion {
+      background: #FFCAAF;
+    }
+    .selectedQuestion td:first-child {
+      border-right: 1px solid white;
+    }
+
+    .subArea {
+      width: 10%;
+      
+      text-align: center;
+    }
+    
+    .questionBody {
+      width: 70%;
+    }
+
+    .standardTable {
+      width: calc(100% - 1px);
+      background: white;
+    }
+
+    .standardTable td {
+      padding: 5px;
+      color: #7b6845;     
+      /*background: white;*/
+      border: 1px solid #FFCAAF; 
+      /*border-right: none;*/
+    }
+
+    .slds-wrap.anchors {
+      width: 100%;
+      align-items: initial;
+    }
+
+    .anchors .slds-col{
+      border: 1px solid #FFCAAF;
+      padding: 5px;
+    }
+
+    .anchors td {
+       padding: 5px; 
+       border: 1px solid #FFCAAF;
+       background: white;
+       vertical-align: top;
+    }
+
+    .anchors td.disabledAnchors {
+        background: #F5F5F5;      
+    }    
+
+
+    :not(.disabled) .anchors td:not(.disabledAnchors) label.slds-checkbox {
+      cursor: pointer;
+    }
+
+    .anchors .slds-checkbox .slds-form-element__label  {
+      display: inline-block;
+      width: calc(100% - 42px);
+    }
+
+    .anchors .slds-checkbox .slds-checkbox--faux {
+      vertical-align: top;
+      top: 2px;
+    }
+
+    .slds-checkbox [type=checkbox][disabled]+.slds-checkbox--faux:after, .slds-checkbox [type=checkbox][disabled]~.slds-checkbox--faux:after {
+      border-color: #7B6845;
+    }
+
+    .questionTable:not(.disabled) tr:not(.questionsDescriptionRow) {
+      cursor: pointer;
+    }
+
+    .instructionCard .slds-text-heading--small.slds-truncate{
+      white-space: normal;
+
+    }
+    .instructionCard td {
+      white-space: normal;      
+    }
+
+    .instructionCard .slds-card__body {
+      padding: 0; 
+      background-color: white;
+    }
+
+    .slds-card.instructionCard {
+      border-radius: 0;
+      border: 1px solid #FFCAAF;
+    }
+
+    .slds-card .slds-table--bordered {
+      border-bottom: none;
+    }
+
+    .slds-card .slds-card__body.textBody {
+      background-color: #fff;
+      border-top: 1px solid #FFCAAF;
+      border-bottom: 1px solid #FFCAAF;      
+      padding: 1rem;
+      color: #7b6845;
+    }
+
+    .slds ol {
+      list-style-type: decimal;
+    }
+
+    .instructionCard .slds-card__header, .instructionCard .slds-card__footer{
+      padding: 0.75rem;
+      background-color: #F4F2E9;
+      color: #8a340d;
+    }
+
+    .standardTitle, .slds-form-element__label.standardTitle {
+      color: #7b6845;
+      font-size: .875rem;
+      font-weight: bold;
+      text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;      
+    }
+
+    .anchors label.slds-checkbox {
+      font-weight: normal;
+    }
+
+    .pageHeader .logo {
+      max-width: initial; 
+      height: 70px;
+    }
+
+    .pageHeader .slds-media__body {
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;         
+    }
+
+    .pageHeader .slds-media__figure {
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;         
+    }
+
+    .pageHeader .slds-align-bottom {
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;              
+    }
+
+    .pageHeader .slds-text-body--regular {
+      color: #7b6845;
+    }
+
+    .pageHeader .detailsWrap .slds-col--padded{
+      margin-top: 10px;
+    }
+
+    #previousInterviewsTable td {
+      white-space: normal;      
+    }
+
+    #previousInterviewsTable th {
+      color: #8a340d;
+    }
+
+    .instructionCard .slds-media__body .slds-text-heading--small {
+      font-size: 0.9rem;
+    }
+
+    textarea.slds-input {
+      resize: vertical;
+      line-height: 1.5;
+      color: #7b6845;
+      border-color: #FFCAAF; 
+      padding: 6px;
+      -webkit-appearance: none;
+      border-radius: 0px;
+    }
+
+    .logoWrap {
+      text-align: center;
+    }
+
+    .slds .slds-input[disabled] {
+      background: #F5F5F5;
+      border-color: #FFCAAF; 
+    }
+
+    .bottomButtonsWrap {
+      display: flex;
+    }
+
+    .bottomButtonsWrap .cancelButtonWrap {
+      flex: 1;
+      display: flex;
+    }
+
+    .bottomButtonsWrap .editModeButtonsWrap {
+      flex: 2;
+      display: flex;
+    }    
+
+    .bottomButtonsWrap .startInterviewButtonWrap {
+      flex: 1;
+      display: flex;
+    }    
+
+    .singleButtonWrap {
+      flex: 1;
+    }
+
+    .right {
+      text-align: right;
+    }
+
+    .center {
+      text-align: center; 
+    }
+
+    .slds-modal__container {
+      padding: 0;
+    }
+
+    .modalCancelButton {
+      float: left;
+    }
+
+    .slds .modal-content {
+      color: #7b6845;
+      border-color: #ff5800;
+    }
+
+    .slds button.slds-button {
+      margin: 0;
+      font-weight: normal;
+      color: #ff5800;
+      border-color: #ff5800;
+      font-family: Verdana, Geneva, sans-serif;
+      padding: 0 8px;
+    }
+
+    .slds button.slds-button:active {
+      color: white;
+      background-color: #ff5800;  
+    }
+
+    .slds button.close {
+        color: #ff5800;
+    }
+
+    .slds .modal-header {
+      background: #ff5800;
+      padding: 15px;
+      border-bottom: 1px solid #ff5800;
+      color: white;
+    }
+
+    .slds .modal-footer {
+      border-top: 1px solid #FFCAAF;
+    }
+
+    .slds .slds-table--bordered th, .slds .slds-table--bordered td {
+      border: 1px solid #FFCAAF;
+    }
+
+    .slds .slds-text-heading--label {
+      color: #8a340d;
+    }
+
+    .slds-table.slds-table--bordered th {
+      color: #8a340d;
+      font-weight: bold;
+    }
+
+    .slds-table.slds-table--bordered td {    
+      color: #7b6845;
+    }
+
+    #processImageWrap {
+      width: 100%;
+      text-align: center;
+      padding: 25px;
+    }
+
+    #processImage {
+      max-height: 320px;
+    }
+
+    .questionsDescriptionRowSmall {
+      display: none;
+    }
+
+    #alertModal .modal-footer {
+      text-align: center;
+    }
+
+    .modal-footer button {
+      min-width: 100px;
+    }
+
+    @media screen and (max-width: 767px) {
+      .headerGrid {
+        display: block;
+      }
+
+      .headerGrid .slds-button-group {
+        margin-top: 10px;
+        justify-content: center;
+      }
+
+      .questionsDescriptionRowSmall {
+        display: table-row;
+      }      
+
+      .questionsDescriptionRow {
+        display: none;
+      }    
+
+      #previousInterviewsTable.slds-max-medium-table--stacked-horizontal tr {
+        border-top: 1px solid #FFCAAF;
+        border-bottom: 5px solid #FFCAAF;
+      }
+
+      #previousInterviewsTable.slds-max-medium-table--stacked-horizontal td:before, #previousInterviewsTable.slds-max-medium-table--stacked-horizontal th:before {
+        color: #8a340d;
+      }
+    }
+
+    @media screen and (max-width: 1279px) {
+      .mainForm {
+        margin: 0 15px;
+      }
+    }
+    @media screen and (min-width: 1280px) {
+      .mainForm {
+        margin: 0 250px;
+      }
+    }
+
+    @media screen and (max-width: 550px) {
+      .anchors .slds-checkbox .slds-form-element__label  {
+        display: block;
+        overflow: auto;
+        margin: 0px;
+        width: 100%;
+        margin-top: 5px;
+      }    
+    }
+
+  </style>
+  <div class="slds">
+        <div class="logoWrap">
+           <img class="logo" src="{!URLFOR($Resource.General_Images,'General_Images/logo-small.gif')}"/>
+        </div>  
+        <br/>
+        <apex:form styleClass="mainForm" id="mainForm">
+            <!-- ******* HEADER ******** -->
+            <div class="slds-page-header pageHeader" role="banner">
+              <div class="slds-grid headerGrid">
+                <div class="slds-col slds-has-flexi-truncate">
+                  <div class="slds-media">
+                    <div class="slds-media__figure">
+                      <svg aria-hidden="true" class="slds-icon slds-icon--large slds-icon-standard-user headerIcon">
+                        <use xlink:href="{!STANDARD_SVG}#task"></use>
+                      </svg>
+                    </div>
+                    <div class="slds-media__body">
+                      <p class="slds-text-heading--label">{!$Label.Interview_Question_Guide}</p>
+                      <div class="slds-grid">
+                        <h1 class="slds-page-header__title slds-m-right--small slds-truncate slds-align-middle">{!Interview__c.RecordType.Name}</h1>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>    
+                <!-- buttons -->      
+                <div class="slds-col slds-no-flex slds-align-bottom">
+                  <div class="buttonsWrap">
+                    <apex:outputPanel rendered="{!editMode}">
+                      <div class="slds-button-group" role="group">
+                        <button class="slds-button slds-button--neutral" onclick="prepareInterviewForSaving('{!$Label.Interview_Completed}')" type="button">{!$Label.Interview_Submit}</button> 
+                        <button class="slds-button slds-button--neutral" onclick="prepareInterviewForSaving('{!$Label.Interview_Open}')" type="button" >{!$Label.Interview_Save_for_Later}</button>
+                        <button class="slds-button slds-button--neutral" onclick="cancel()" type="button">{!$Label.Interview_Cancel}</button>
+                      </div>
+                    </apex:outputPanel>
+
+                    <apex:outputPanel rendered="{!AND(NOT(editMode), rec.Status__c == $Label.Interview_Completed)}">
+                      <div class="slds-button-group" role="group">
+                        <button class="slds-button slds-button--neutral" onclick="cancel()" type="button">{!$Label.Interview_Cancel}</button>
+                      </div>
+                    </apex:outputPanel>                    
+
+                    <apex:outputPanel rendered="{!AND(NOT(editMode), rec.Status__c != $Label.Interview_Completed)}">
+                      <div class="slds-button-group" role="group">    
+                        <button class="slds-button slds-button--neutral" onclick="editInterview()" type="button">{!$Label.Interview_Start_Interview}</button>
+                        <button class="slds-button slds-button--neutral" onclick="cancel()" type="button">{!$Label.Interview_Cancel}</button>
+                      </div>
+                    </apex:outputPanel>                                        
+                  </div>      
+                </div>
+              </div>
+              <div class="slds-grid slds-wrap detailsWrap">          
+                <div class="slds-col--padded slds-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--3-of-12">
+                  <p class="slds-text-heading--label slds-truncate">{!$Label.Interview_Candidate_Name}</p>
+                  <p class="slds-text-body--regular slds-truncate">{!Interview__c.Candidate_Name__c}</p>
+                </div>
+                <div class="slds-col--padded slds-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--3-of-12">
+                  <p class="slds-text-heading--label slds-truncate">{!$Label.Interview_Interviewer_Name}</p>
+                  <p class="slds-text-body--regular slds-truncate"><apex:outputField value="{!Interview__c.Interviewer__c}"></apex:outputField></p>
+                </div>
+                <div class="slds-col--padded slds-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--3-of-12">
+                  <p class="slds-text-heading--label slds-truncate">{!$Label.Interview_Status}</p>
+                  <p class="slds-text-body--regular slds-truncate">{!Interview__c.Status__c}</p>
+                </div>
+
+                <div class="slds-col--padded slds-size--1-of-2 slds-medium-size--3-of-12 slds-large-size--3-of-12">
+                  <p class="slds-text-heading--label slds-truncate">{!$Label.Interview_Candidate_CV}</p>
+                  <apex:repeat value="{!attachmentsList}" var="attachment">
+                    <p class="slds-text-body--regular slds-truncate">
+                      <a href="#" type="button" onclick="showPdf('{!attachment.Id}')">{!attachment.Name}</a>
+                    </p>
+                  </apex:repeat>
+                </div>
+              </div>            
+            </div>              
+            <br/>
+            <!-- ******* HEADER end ******** -->
+
+            <!-- ******* Instructions ******** -->
+            <apex:outputPanel rendered="{!editMode}">
+              <div class="slds-card instructionCard">
+                <div class="slds-card__header slds-grid">
+                  <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                      <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--large">
+                        <use xlink:href="{!UTILITY_SVG}#info"></use>
+                      </svg>
+                    </div>
+                    <div class="slds-media__body">
+                      <h2 class="slds-text-heading--small">
+                      Your role is to provide the Final Validation towards hiring this candidate or not.<br/>
+                      Based on the interview comments and feedback provided by the first 5 assessors, your role is to further probe on key areas and gain new insights on the candidate to ensure a cultural fit.<br/>
+                      During this period, you are also encouraged to “sell” the candidate on the position and the company.
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-card__body">
+                  <div id="processImageWrap">
+                    <img id="processImage" src="{!URLFOR($Resource.General_Images,'General_Images/process.png')}"/>
+                  </div>
+                </div>
+              </div>
+              <br/>
+
+              <div class="slds-card instructionCard">
+                <div class="slds-card__header slds-grid">
+                  <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                    <div class="slds-media__figure">
+                      <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--large">
+                        <use xlink:href="{!UTILITY_SVG}#info"></use>
+                      </svg>
+                    </div>
+                    <div class="slds-media__body">
+                      <h2 class="slds-text-heading--small slds-truncate">
+                        This guide provides several questions per competency. We recommend that you select only one question per competency.  We have provided some examples of questions.<br/>
+                        When needed probe further using the STAR method (also known as “STAR technique”):
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-card__body textBody">
+                  <div id="starImageWrap">
+                    <img id="starImage" src="{!URLFOR($Resource.General_Images,'General_Images/star.png')}"/>
+                  </div>                
+
+<!--                   <ol>
+                    <li>Situation - what was the exact Situation or challenge? </li>
+                    <li>Task - what was your Task or role in the project? </li>
+                    <li>Actions - what Actions did you specifically undertake? </li>
+                    <li>Result - what was the Result and what did you learn from it?  </li>
+                  </ol> -->
+                </div>
+                 <div class="slds-card__footer">
+                    The questions provided in this guide help to measure competencies that have been identified as critical to be successful at AB InBev.<br/>
+                    Use your judgment to reword the questions as needed to reflect the specific situation.<br/>          
+                    <u>Document the candidate’s behavioral examples and comments in the “NOTES” section.</u> 
+                 </div>
+              </div>
+              <br/>
+            </apex:outputPanel>
+            <!-- ******* Instructions end ******** -->
+
+            <!-- ******* Introduction row ******** -->
+            <table class="standardTable">
+              <tr class="questionsDescriptionRowSmall">
+                <td colspan="2" class="questionsDescription">
+                  {!$Label.Interview_Introduction}
+                </td>
+              </tr>              
+              <tr class="questionsDescriptionRow">
+                <td rowspan="2" class="questionsDescription">
+                  {!$Label.Interview_Introduction}
+                </td>
+              </tr>
+              <tr>
+                <td class="subArea">
+                  {!$Label.Interview_Lead}
+                </td>
+                <td class="questionBody">
+                  {!introduction}
+                </td>                      
+              </tr>            
+            </table>
+            <!-- ******* Introduction row end ******** -->            
+            <br/>
+            <!-- ******* Sections ******** -->
+            <apex:variable value="1" var="index"/>
+            <apex:repeat value="{!sectionDataList}" var="sectionData">
+              <div class="standardTitle">{!sectionData.competency}</div>
+              <span class="sectionWrap" sectionIndex="{!index}" sectionCompetency="{!sectionData.competency}">
+                <table class="standardTable questionTable {!IF(editMode,'','disabled')}">
+                  <tr class="questionsDescriptionRowSmall">
+                    <td colspan="2" class="questionsDescription">
+                      {!sectionData.sectionIntro}
+                    </td>
+                  </tr>
+                  <tr class="questionsDescriptionRow">
+                    <td rowspan="{!sectionData.questions.size + 1}" class="questionsDescription">
+                      {!sectionData.sectionIntro}
+                    </td>
+                  </tr>
+                  <apex:repeat value="{!sectionData.questions}" var="question">
+                    <tr questionId="{!question.Id}">
+                      <td class="subArea">
+                        {!question.Sub_Area__c}
+                      </td>
+                      <td class="questionBody">
+                        {!question.Question__c}
+                      </td>
+                    </tr>
+                  </apex:repeat>
+                </table>
+                <table class="scoreAndAnchors {!IF(editMode,'','disabled')}" >
+                  <tr class="rateLabels">
+                    <td colspan="3">{!$Label.Interview_Unfavorable}</td>
+                    <td colspan="3">{!$Label.Interview_Acceptable}</td>
+                    <td colspan="3">{!$Label.Interview_Favorable}</td>                                    
+                  </tr>
+                  <tr class="scoreRow">
+                    <apex:repeat value="{!numbersList}" var="num">
+                      <td score='{!num}'>
+                        {!num}
+                      </td>
+                    </apex:repeat>
+                  </tr>
+                  <apex:outputPanel rendered="{!sectionData.hasAnchor}">
+                    <tr class="anchors">
+                      <td colspan="3" index="0" class="disabledAnchors">
+                        <apex:repeat value="{!sectionData.anchorsUnfavorable}" var="anchor">
+                          <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                              <label class="slds-checkbox">
+                                <input type="checkbox" class="slds-input" disabled="true" value="{!anchor.Id}"/>
+                                <span class="slds-checkbox--faux"></span>
+                                <span class="slds-form-element__label">{!anchor.Anchor__c}</span>
+                              </label>
+                            </div>
+                          </div>                    
+                        </apex:repeat>
+                      </td>
+                      <td colspan="3" index="1" class="disabledAnchors">
+                         <apex:repeat value="{!sectionData.anchorsAcceptable}" var="anchor">
+                          <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                              <label class="slds-checkbox">
+                                <input type="checkbox" class="slds-input" disabled="true" value="{!anchor.Id}"/>
+                                <span class="slds-checkbox--faux"></span>
+                                <span class="slds-form-element__label">{!anchor.Anchor__c}</span>
+                              </label>
+                            </div>
+                          </div>                                    
+                        </apex:repeat>     
+                      </td>
+                      <td colspan="3" index="2" class="disabledAnchors">
+                        <apex:repeat value="{!sectionData.anchorsFavorable}" var="anchor">
+                          <div class="slds-form-element">
+                            <div class="slds-form-element__control">
+                              <label class="slds-checkbox">
+                                <input type="checkbox" class="slds-input" disabled="true" value="{!anchor.Id}"/>
+                                <span class="slds-checkbox--faux"></span>
+                                <span class="slds-form-element__label">{!anchor.Anchor__c}</span>
+                              </label>
+                            </div>
+                          </div>                                      
+                        </apex:repeat>      
+                      </td>                  
+                    </tr>
+                  </apex:outputPanel>
+
+                </table>
+                <br/>
+              </span>
+              <apex:variable var="index" value="{!VALUE(index) + 1}"/>
+            </apex:repeat>
+            <!-- ******* Sections end ******** -->
+            
+            
+            <!-- Overall Score -->        
+            <div class="standardTitle">{!$ObjectType.Interview__c.fields.Overall_Score__c.Label}</div>                             
+            <table class="scoreAndAnchors" id="overallScore" >
+              <tr class="rateLabels">
+                <td colspan="3">{!$Label.Interview_Unfavorable}</td>
+                <td colspan="3">{!$Label.Interview_Acceptable}</td>
+                <td colspan="3">{!$Label.Interview_Favorable}</td>                                    
+              </tr>
+              <tr class="scoreRow">
+                <apex:repeat value="{!numbersList}" var="num">
+                  <td score='{!num}'>
+                    {!num}
+                  </td>
+                </apex:repeat>
+              </tr>
+            </table>
+            <!-- Overall Score end-->            
+            <br/>
+
+            <!-- Notes -->
+            <div class="slds-form-element">
+                <label class="slds-form-element__label standardTitle">{!$ObjectType.Interview__c.fields.Notes__c.Label}</label>
+                <div class="slds-form-element__control">
+                  <textarea id="notesTextarea" class="slds-input" rows="3" min-chars="{!textareaMinimumChar['notesTextarea']}"></textarea>
+                </div>
+            </div>        
+            <!-- Notes end -->         
+            <br/>
+
+            <!-- Opportunities -->
+            <div class="slds-form-element">
+                <label class="slds-form-element__label standardTitle">{!$ObjectType.Interview__c.fields.Opportunities__c.Label}</label>
+                <div class="slds-form-element__control">
+                  <textarea id="opportunitiesTextarea" class="slds-input" rows="3" min-chars="{!textareaMinimumChar['opportunitiesTextarea']}"></textarea>
+                </div>
+            </div>        
+            <!-- Opportunities end -->         
+            <br/>
+            <!-- Strengths -->
+            <div class="slds-form-element">
+                <label class="slds-form-element__label standardTitle">{!$ObjectType.Interview__c.fields.Strengths__c.Label}</label>
+                <div class="slds-form-element__control">
+                  <textarea id="strengthsTextarea" class="slds-input" rows="3" min-chars="{!textareaMinimumChar['strengthsTextarea']}"></textarea>
+                </div>
+            </div>        
+            <!-- Strengths end -->      
+            <br/>
+
+            <!--  Notes from previous interviews -->
+            <div class="standardTitle">{!$Label.Interview_Previous_Interviews_Header}</div>
+            <apex:outputPanel rendered="{!previousInterviews.size == 0}">
+              {!$Label.Interview_No_Previous_Interviews}
+            </apex:outputPanel>
+            <apex:outputPanel rendered="{!previousInterviews.size > 0}">
+              <table id="previousInterviewsTable" class="slds-table slds-table--bordered slds-no-row-hover slds-max-medium-table--stacked-horizontal">
+                <thead>
+                  <tr class="slds-text-heading--label">               
+                    <th scope="col">
+                      <div >{!$Label.Interview_Date}</div>
+                    </th>
+                    <th scope="col">
+                      <div >{!$Label.Interview_Position}</div>
+                    </th>           
+                    <th scope="col">
+                      <div >{!$ObjectType.Interview__c.fields.Notes__c.Label}</div>
+                    </th>                                               
+                    <th scope="col">
+                      <div >{!$ObjectType.Interview__c.fields.Opportunities__c.Label}</div>
+                    </th>                    
+                    <th scope="col">
+                      <div >{!$ObjectType.Interview__c.fields.Strengths__c.Label}</div>
+                    </th>
+                  </tr>
+                </thead>    
+                <tbody>
+                  <apex:repeat value="{!previousInterviews}" var="interview">
+                    <tr class="slds-hint-parent" >
+                      <td data-label="{!$Label.Interview_Date}">
+                          <apex:outputText value="{0,date,dd'/'MM'/'yyyy' 'hh':'mm}">
+                              <apex:param value="{!interview.CreatedDate}" /> 
+                          </apex:outputText>                                                          
+                      </td>
+                      <td data-label="{!$Label.Interview_Position}">
+                          {!interview.RecordType.Name}
+                      </td>
+                      <td data-label="{!$ObjectType.Interview__c.fields.Notes__c.Label}">
+                          {!interview.Notes__c}
+                      </td>                                      
+                      <td data-label="{!$ObjectType.Interview__c.fields.Opportunities__c.Label}">
+                          {!interview.Opportunities__c}
+                      </td>                      
+                      <td data-label="{!$ObjectType.Interview__c.fields.Strengths__c.Label}">
+                          {!interview.Strengths__c}
+                      </td>
+                    </tr>
+                  </apex:repeat>
+                </tbody>
+              </table>    
+            </apex:outputPanel>                        
+            <!--  Notes from previous interviews  end-->
+            <br/>
+            <br/>
+            <!-- bottom buttons -->
+              <div class="bottomButtonsWrap">
+                <apex:outputPanel rendered="{!editMode}" styleClass="editModeButtonsWrap">
+                  <span class="singleButtonWrap">
+                    <button class="slds-button slds-button--neutral" onclick="prepareInterviewForSaving('{!$Label.Interview_Completed}')" type="button">{!$Label.Interview_Submit}</button> 
+                  </span>
+                  <span class="singleButtonWrap center">
+                    <button class="slds-button slds-button--neutral" onclick="prepareInterviewForSaving('{!$Label.Interview_Open}')" type="button">{!$Label.Interview_Save_for_Later}</button>
+                  </span>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!AND(NOT(editMode), rec.Status__c != $Label.Interview_Completed)}" styleClass="startInterviewButtonWrap">
+                  <span class="singleButtonWrap">
+                    <button class="slds-button slds-button--neutral" onclick="editInterview()" type="button">{!$Label.Interview_Start_Interview}</button>
+                  </span>
+                </apex:outputPanel>                
+                <span class="cancelButtonWrap">
+                  <span class="singleButtonWrap {!IF(rec.Status__c == $Label.Interview_Completed,'center','right')}">
+                    <button class="slds-button slds-button--neutral" onclick="cancel()" type="button">{!$Label.Interview_Cancel}</button>
+                  </span>
+                </span>
+              </div>
+            <!-- bottom buttons end -->                                           
+            <!-- <apex:actionFunction name="goBackAF" action="{!goBack}" reRender="none" /> -->
+            <apex:actionFunction name="editInterview" action="{!editInterview}" />            
+        </apex:form>
+
+        <!-- comfirmation modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="confirmModal"  data-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title modalHeader"></h4>
+              </div>
+              <div class="modal-body modalBody">
+                <p></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="slds-button slds-button--neutral modalCancelButton" data-dismiss="modal">{!$Label.Interview_Modal_Left_Button}</button>
+                <button type="button" class="slds-button slds-button--neutral modalOkButton">{!$Label.Interview_Modal_Right_Button}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- comfirmation modal end-->
+
+        <!-- alert modal -->
+        <div class="modal fade" tabindex="-1" role="dialog" id="alertModal"  data-backdrop="static">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title modalHeader"></h4>
+              </div>
+              <div class="modal-body modalBody">
+                <p></p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="slds-button slds-button--neutral modalOkButton" data-dismiss="modal">{!$Label.Interview_Modal_Single_Button}</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- alert modal end-->        
+      </div>
+
+  <script type="text/javascript">
+    $(document).ready(function(){
+      if ('{!editMode}' === 'true') {      
+        //if we're in edit mode, we bind click events to the form
+        $(document).on("click", ".scoreAndAnchors:not(#overallScore) .scoreRow td", function(e){
+          //clicking on score - moving selection from previous score to the new one
+          $(this).closest("table").find(".selectedScore").removeClass("selectedScore");
+          $(this).addClass("selectedScore");
+          var val = parseInt($(this).text().trim()) -1;
+          var index = parseInt(val/3);
+
+          //removing checked checkboxes from other anchros (if not under the score) and disabling them
+          var $otherAnchors = $(this).closest("table").find(".anchors td:not([index=" + index + "])");
+          $otherAnchors.addClass("disabledAnchors");
+          $otherAnchors.find("input[type=checkbox]").prop("checked",false).attr("disabled","true");
+
+          //enbaling checkboxes under the selected score
+          var $thisAnchors =  $(this).closest("table").find(".anchors td[index=" + index + "]");
+          $thisAnchors.removeClass("disabledAnchors");
+          $thisAnchors.find("input[type=checkbox]").removeAttr("disabled");
+
+          //updating overall score
+          var totalQuestions = $(".scoreAndAnchors:not(#overallScore) .scoreRow").length;
+          var scoreSum = 0;
+          $(".scoreAndAnchors:not(#overallScore) .scoreRow td.selectedScore").each(function(i,td){
+            scoreSum += parseInt($(td).attr('score'));
+          });
+
+          //selecting the overall score
+          var totalScore = Math.round(scoreSum/totalQuestions);
+          $("#overallScore").find("td.selectedScore").removeClass("selectedScore");
+          $("#overallScore").find("td[score=" + totalScore + "]").addClass("selectedScore");
+        });
+
+        $(document).on("click",".questionTable tr:not(.questionsDescriptionRow)",function(e){
+          //selecting question - moving the previous selection to the new one
+          $(this).closest("table").find(".selectedQuestion").removeClass("selectedQuestion");
+          $(this).addClass("selectedQuestion");
+        });
+      } else {
+        //disabling textareas if not edit mode
+        $("textarea").attr("disabled","true");
+      }
+
+      var initialValues = {
+        Score_1__c: '{!rec.Score_1__c}', 
+        Score_2__c: '{!rec.Score_2__c}',
+        Score_3__c: '{!rec.Score_3__c}',
+        Score_4__c: '{!rec.Score_4__c}',
+        Overall_Score__c: '{!rec.Overall_Score__c}',
+        Selected_Anchors__c: '{!rec.Selected_Anchors__c}', 
+        Selected_Question_1__c: '{!rec.Selected_Question_1__c}', 
+        Selected_Question_2__c: '{!rec.Selected_Question_2__c}', 
+        Selected_Question_3__c: '{!rec.Selected_Question_3__c}',
+        Selected_Question_4__c: '{!rec.Selected_Question_4__c}',
+        Notes__c: '{!JSENCODE(rec.Notes__c)}',
+        Opportunities__c: '{!JSENCODE(rec.Opportunities__c)}',
+        Strengths__c: '{!JSENCODE(rec.Strengths__c)}'        
+      };
+      setSelectedValuesOnLoad(initialValues);
+      
+    });
+
+    function setSelectedValuesOnLoad(initialValues) {
+      //getting the initial values of the interview records and populate the form by it
+      $.each(initialValues,function(key,value){
+        if (value != "") {
+          if (key.indexOf('Selected_Question') == 0) {
+            //marking selected questions
+            $(".questionTable tr[questionId=" + value + "]").addClass("selectedQuestion");
+          } else if (key.indexOf('Score') == 0) {
+            //marking selected score
+            var sectionIndex = key.charAt(6);
+            $(".sectionWrap[sectionIndex=" + sectionIndex + "]").find(".scoreRow td[score=" + value + "]").addClass("selectedScore");
+            //finding the index of favorable, acceptable or unfavorable
+            var val = parseInt(value) -1;
+            var index = parseInt(val/3);
+
+            //enabling checkboxes under the selected score
+            if ('{!editMode}' == 'true') {
+              $(".sectionWrap[sectionIndex=" + sectionIndex + "]").find(".scoreAndAnchors .anchors td[index=" + index + "]").removeClass("disabledAnchors").find("input[type=checkbox]").removeAttr("disabled");         
+            }
+
+          } else if (key.indexOf('Selected_Anchors') == 0) {
+            //checking selected anchors
+            var anchorsArr = value.split(";");
+            $(anchorsArr).each(function(i,anchorId){
+              $(".scoreAndAnchors .anchors input[value=" + anchorId + "]").prop("checked",true);
+            });
+          } else if (key == "Notes__c") {
+            $("#notesTextarea").val(value);
+          } else if (key == "Opportunities__c") {
+            $("#opportunitiesTextarea").val(value);
+          } else if (key == "Strengths__c") {
+            $("#strengthsTextarea").val(value);
+          } else if (key == "Overall_Score__c") {
+            $("#overallScore").find("td[score=" + Math.round(value) + "]").addClass("selectedScore");
+          }
+        }
+      });
+    }
+
+    function validateForm() {
+      var message = "";   //the message that will be displayed on the popup
+      var $element = null;  //the element to scroll to in case of an error
+      $(".sectionWrap").each(function(i,section){
+        //checking for selected question and score for each section
+        var selectedQuestion = $(section).find(".questionTable .selectedQuestion").length > 0;
+        var selectedScore = $(section).find(".scoreAndAnchors .selectedScore").length > 0;        
+        if (!selectedQuestion) {
+          // message = "Please choose question for " + $(section).attr("sectionCompetency") + " section."  //label
+          message = '{!$Label.Interview_Please_Choose_Question}'.replace("%competency%",$(section).attr("sectionCompetency"));
+          $element = $(section).prev('.standardTitle');
+          return false;
+        }
+        if (!selectedScore) {
+          // message = "Please choose score for " + $(section).attr("sectionCompetency") + " section." //label
+          message = '{!$Label.Interview_Please_Choose_Score}'.replace("%competency%",$(section).attr("sectionCompetency"));          
+          $element = $(section).prev('.standardTitle');
+          return false;          
+        }
+      });
+
+      if (message !== "") {
+        return {
+          message: message,
+          $element: $element
+        };
+      }
+
+      //checking textareas for minimun length
+      $("textarea.slds-input").each(function(i,textarea){
+        var length = $(textarea).val().trim().length;
+        var minLength = $(textarea).attr("min-chars");
+        if (length < minLength) {
+          var $wrap = $(textarea).closest('.slds-form-element');
+          var label = $wrap.find("label").text().trim();
+          var missing = minLength - length;
+          // message = "Please enter at least minLength characters on " + label + " (" + missing + " missing).";
+          message = '{!$Label.Interview_Enter_More_Charachters}'.replace("%minChars%",minLength).replace("%label%",label).replace("%missing%",missing);
+
+          $element = $wrap;
+          return false;
+        }
+      });
+
+      return {
+        message: message,
+        $element: $element
+      }
+    }
+
+    function openAlertModal(headerText,bodyText,okHandler,params){
+      //alert modal - a popup with header, message and one button.
+      headerText = headerText || '';  //the text on the header of the popup
+      bodyText = bodyText || '';      //the text on the body of the popup
+      okHandler = okHandler || closeConfirmModal; //the handler function that is called after clicking the ok button. default is closing the popup
+      params = params || [];  //params to be passed to the handler
+      if (params.length == 1) { //in case there's only 1 param, we pass it only
+        params = params[0];
+      }
+
+      $("#alertModal .modalHeader").text(headerText);
+      $("#alertModal .modalBody").text(bodyText);
+
+      $("#alertModal .modalOkButton").off("click");
+      $("#alertModal .modalOkButton").on("click",function() {
+        okHandler(params);
+      });            
+
+      $('#alertModal').modal('show');
+    }
+
+    function cancel() {
+      openConfirmModal("{!$Label.Interview_Quit_Interview}","{!$Label.Interview_Are_you_sure}",goBackAF,closeConfirmModal); 
+    }
+
+    function openConfirmModal(headerText,bodyText,okHandler,cancelHandler,params){
+      //confirm modal - a popup with header, message and 2 buttons.
+      headerText = headerText || '';  //the text on the header of the popup
+      bodyText = bodyText || ''; //the text on the body of the popup
+      okHandler = okHandler || closeConfirmModal;     //the handler function that is called after clicking the ok button. default is closing the popup
+      cancelHandler = cancelHandler || closeConfirmModal;  //the handler function that is called after clicking the cancel button. default is closing the popup
+      params = params || [];
+      if (params.length == 1) {
+        params = params[0];
+      }
+
+      $("#confirmModal .modalHeader").text(headerText);
+      $("#confirmModal .modalBody").text(bodyText);
+      $("#confirmModal .modalCancelButton").off("click");
+      $("#confirmModal .modalCancelButton").on("click",function() {
+        cancelHandler(params);
+        
+      });      
+      $("#confirmModal .modalOkButton").off("click");
+      $("#confirmModal .modalOkButton").on("click",function() {
+        okHandler(params);
+      });            
+
+      $('#confirmModal').modal('show');
+    }
+
+    function closeConfirmModal() {
+      $('#confirmModal').modal('hide');
+    }        
+
+    function goToElement($element) {
+      //scrolling the page to $element
+      $('html, body').animate({
+        scrollTop: $element.offset().top
+      }, 500);
+    }
+
+    function prepareInterviewForSaving(status) {
+      //before saving, checking the form and open confirmation popup if final submit
+      if (status == '{!$Label.Interview_Completed}') {
+        //in user clicked submit, first validating
+        var validateFormResult = validateForm();
+        if (validateFormResult.message === '') {
+          //validation success
+          openConfirmModal("{!$Label.Interview_Save_Interview}","{!$Label.Interview_Finalize_Interview}",saveInterview,closeConfirmModal,[status]); 
+        } else {
+          //validation fail
+          openAlertModal("{!$Label.Interview_Submit_Interview_Error}",validateFormResult.message,goToElement,[validateFormResult.$element]);  
+        }
+      } else {
+        //user only saves for later, no need to validate
+        saveInterview(status);
+      }
+
+    }
+
+    function saveInterview(status) {
+      //saving the interview. collecting all form data and send it to the controller
+      $('#confirmModal').modal('hide');
+      var interviewData = {
+        Selected_Anchors__c: [],
+        Status__c: status,
+        Id: '{!Interview__c.Id}',
+        Notes__c: $("#notesTextarea").val(),
+        Opportunities__c: $("#opportunitiesTextarea").val(),
+        Strengths__c: $("#strengthsTextarea").val()
+      };
+
+      var scoreSum = 0;
+
+      $(".sectionWrap").each(function(i,section){
+        var sectionIndex = $(section).attr("sectionIndex");
+
+        //getting selected question
+        var selectedQuestionId = $(section).find(".questionTable .selectedQuestion").attr("questionId");
+        //getting selected score
+        var selectedScore = parseInt($(section).find(".scoreAndAnchors .scoreRow .selectedScore").text().trim());
+        scoreSum += selectedScore;
+
+        //getting selected anchors
+        $(section).find(".anchors td:not(.disabledAnchors)").find("input[type=checkbox]").each(function(i,checkbox){
+          if ($(checkbox).prop( "checked" )) {
+            interviewData.Selected_Anchors__c.push($(checkbox).val());          
+          }
+        });
+
+        var selectedQuestionProperty = "Selected_Question_" + sectionIndex + "__c";        
+        interviewData[selectedQuestionProperty] = selectedQuestionId || null;
+
+        var scoreProperty = "Score_" + sectionIndex + "__c";
+        interviewData[scoreProperty] = !isNaN(selectedScore) ? selectedScore : null;
+      });
+      //getting the number of questions
+      var totalQuestions = $(".scoreAndAnchors:not(#overallScore) .scoreRow").length;
+      //calculating total score
+      var totalScore = scoreSum/totalQuestions;
+      interviewData.overall_score__c = totalScore;
+
+      interviewData.Selected_Anchors__c = interviewData.Selected_Anchors__c.join(";");
+
+      Interview_Controller.saveInterview(interviewData,function(result){
+        console.log("saveInterview: result= ", result);
+        if (result === 'ok') {
+          openAlertModal('{!$Label.Interview_Save_Interview}','{!$Label.Interview_Saved_Successfully}',goBackAF);
+        } else {
+          openAlertModal('{!$Label.Interview_Save_Interview}',result); 
+        }
+      });
+    }
+
+    //overriding the default sfdc function, in order not to focus the first input
+    function setFocusOnLoad() {}
+    
+    function showPdf(attachmentId) {
+      //opening attachment. only succeeds in this way.
+      window.open(
+        'https://' + window.location.hostname + '/servlet/servlet.FileDownload?file=' + attachmentId,
+        '_blank' 
+      );
+    }
+
+    function goBackAF() {
+      //going back to the candidate record
+      if (window.sforce && window.sforce.one) {
+        window.sforce.one.navigateToSObject('{!rec.Candidate__c}');      
+      } else {
+        window.location.href = '/{!rec.Candidate__c}';
+      }
+    }
+  </script>
+
+  <!-- workaround for ios auto scroll to top bug -->
+  <script> 
+    (function(){try{var a=navigator.userAgent; 
+    if((a.indexOf('Salesforce')!=-1)&&(a.indexOf('iPhone')!=-1||a.indexOf('iPad')!=-1)&&(a.indexOf('OS/9')!=-1||a.indexOf('OS 9')!=-1)&&(a.indexOf('Safari')==-1)){ 
+    var s=document.createElement('style'); 
+    s.innerHTML="html,html body{overflow: auto;-webkit-overflow-scrolling:touch;}body{position:absolute;left:0;right:0;top:0;bottom:0;}"; 
+    document.getElementsByTagName('head')[0].appendChild(s);}}catch(e){}})(); 
+  </script>  
+</html>
+</apex:page>

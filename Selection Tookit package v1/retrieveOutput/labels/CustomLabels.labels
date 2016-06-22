@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Interview_Acceptable</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Acceptable</shortDescription>
+        <value>Acceptable</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Are_you_sure</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Are you sure</shortDescription>
+        <value>Are you sure?</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Cancel</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Candidate_CV</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Candidate CV</shortDescription>
+        <value>Candidate CV</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Candidate_Name</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Candidate Name</shortDescription>
+        <value>Candidate Name</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Completed</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Completed</shortDescription>
+        <value>Completed</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Date</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Date</shortDescription>
+        <value>Date</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Enter_More_Charachters</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Enter More Charachters</shortDescription>
+        <value>Please enter at least %minChars% characters on %label% (%missing% missing).</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Error_Occured</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Error Occured</shortDescription>
+        <value>An error occured:</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Favorable</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Favorable</shortDescription>
+        <value>Favorable</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Finalize_Interview</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Finalize Interview</shortDescription>
+        <value>Are you sure you want to finalize this interview?</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Interviewer_Name</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Interviewer Name</shortDescription>
+        <value>Interviewer Name</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Introduction</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Introduction</shortDescription>
+        <value>Introduction</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Lead</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Lead</shortDescription>
+        <value>Lead</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Modal_Left_Button</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Modal Left Button</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Modal_Right_Button</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview_Modal_Right_Button</shortDescription>
+        <value>OK</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Modal_Single_Button</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview_Modal_Single_Button</shortDescription>
+        <value>OK</value>
+    </labels>
+    <labels>
+        <fullName>Interview_No_Previous_Interviews</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview No Previous Interviews</shortDescription>
+        <value>No previous interviews found</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Open</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Open</shortDescription>
+        <value>Open</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Please_Choose_Question</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Please Choose Question</shortDescription>
+        <value>Please choose question for %competency% section.</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Please_Choose_Score</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Please Choose Score</shortDescription>
+        <value>Please choose score for %competency% section.</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Position</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Position</shortDescription>
+        <value>Position</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Previous_Interviews_Header</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Previous Interviews Header</shortDescription>
+        <value>Data from previous interviews</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Question_Guide</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Question Guide</shortDescription>
+        <value>Question Guide</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Quit_Interview</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Quit Interview</shortDescription>
+        <value>Quit Interview</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Save_Interview</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Save Interview</shortDescription>
+        <value>Save Interview</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Save_for_Later</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Save for Later</shortDescription>
+        <value>Save for Later</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Saved_Successfully</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Saved Successfully</shortDescription>
+        <value>Interview successfully saved.</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Start_Interview</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Start Interview</shortDescription>
+        <value>Start Interview</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Status</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Status</shortDescription>
+        <value>Status</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Submit</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Submit</shortDescription>
+        <value>Submit</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Submit_Interview_Error</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Submit Interview Error</shortDescription>
+        <value>Submit Interview Error</value>
+    </labels>
+    <labels>
+        <fullName>Interview_Unfavorable</fullName>
+        <categories>Interview Page</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Interview Unfavorable</shortDescription>
+        <value>Unfavorable</value>
+    </labels>
+</CustomLabels>

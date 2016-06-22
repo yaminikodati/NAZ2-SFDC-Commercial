@@ -1,0 +1,49 @@
+<apex:page standardController="Interview__c" >
+    
+    <apex:form >
+         <apex:pageBlock title="Schedule The Interview" mode="detail">
+             
+             <table border="1" width="100%">
+    
+    <tr>
+    <td>Type Of the Interview:</td>
+    <td><apex:inputField value="{!Interview__c.recordtypeId}"/></td>
+    </tr>
+               
+                 <tr>
+    <td>Position:</td>
+    <td><apex:inputField value="{!Interview__c.Position__c}"/></td>
+    </tr>
+    <tr>
+    <td>Candidate Id:</td>
+    <td><apex:inputField value="{!Interview__c.Candidate__c}"/></td>
+    </tr>
+    <tr>
+    <td>Name Of the Interviewer:</td>
+    <td><apex:inputField value="{!Interview__c.Interviewer__c}"/></td>
+    </tr>
+    <tr>
+    <td>Name Of the Recruitment Coordinator.:</td>
+    <td><apex:inputField value="{!Interview__c.Recruitment_Coordinator__c}"/></td>
+    </tr>
+                 
+    <tr>
+    <td>Due Date for the interview:</td>
+    <td><apex:inputField value="{!Interview__c.End_Time__c}"/></td>
+    </tr>
+    <tr>
+    <td>Notes for the interview:</td>
+    <td><apex:inputField value="{!Interview__c.Comments__c}"/></td>
+    </tr>
+                 
+                 
+                 
+ </table>
+        
+             <apex:pageBlockButtons >
+             <apex:commandButton action="{!save}" value="Save"/>
+             <apex:commandButton action="{!cancel}" value="Cancel"/>
+        </apex:pageBlockButtons>
+             </apex:pageBlock>
+        </apex:form>
+</apex:page>
