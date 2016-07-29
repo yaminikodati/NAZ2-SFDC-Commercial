@@ -1,0 +1,31 @@
+Load static resources (3)
+Create email folder manually
+Override functionality of edit button for interview should be made default
+
+<actionOverrides>
+        <actionName>Edit</actionName>
+        <content>Default</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+    <<actionOverrides>
+        <actionName>View</actionName>
+        <content>Interview_View</content>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Visualforce</type>
+    </actionOverrides>
+	
+	modify manually
+
+remove the candidate layout and define it manually
+
+remove managenetworks permission from system admin profile
+
+create global action
+
+edit the related list layout for interview on candidate layout
+
+change the base url on the email template
+
+sharing settings manually
+        
